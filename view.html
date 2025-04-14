@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <link href="style1.css" rel="stylesheet">
+  <title>Corrected contributors</title>
+</head>
+
+<body>
+  <main>
+    <div id="connect-group">
+      <button id="connect-btn">Connect</button>
+      <button id="disconnect-btn">Disconnect</button>
+    </div>
+    <div class="form-group">
+      <div id="current-balance-group">
+        <label>Wallet Balance:</label>
+        <span id="wallet-balance-span"> 0 ETH</span>
+      </div>
+      <div>
+        <h1 id="top"> VIEW CONTRIBUTOR </h1>
+        <input id="contributorId" type="number" placeholder="ID">
+        <button id="view-btn">VIEW</button>
+        <pre id="output"></pre>
+
+      </div>
+
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js" type="application/javascript"></script>
+  <script src="script.js"></script>
+
+  <script>
+    const viewContributorBtn = document.getElementById("view-btn")
+
+    async function getContributor() {
+      console.log("benjamin");
+      const id = document.getElementById("contributorId").value;
+      const contributor = await ContributorsContract.getContributor(id);
+      console.log(contributor);
+      document.getElementById("output").innerText =
+        `Name: ${contributor.name}\n` +
+        `Amount: ${contributor.amount}\n` +
+        `Count: ${contributor.contributionCount}\n` +
+        `Last: ${new Date(contributor.lastContributionTime * 1000).toLocaleString()}\n` +
+        `Registered: ${contributor.isRegistered}`;
+    }
+    viewContributorBtn.addEventListener("click", getContributor);
+  </script>
+</body>
+
+</html>

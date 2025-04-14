@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link href="style2.css" rel="stylesheet">
+    <title>Corrected contributors</title>
+</head>
+
+<body>
+    <main>
+        <div id="connect-group">
+            <button id="connect-btn">Connect</button>
+            <button id="disconnect-btn">Disconnect</button>
+        </div>
+        <div class="form-group">
+            <div id="current-balance-group">
+                <label>Wallet Balance:</label>
+                <span id="wallet-balance-span"> 0 ETH</span>
+            </div>
+            <div>
+                <h1 id="top"> ADD CONTRIBUTION </h1>
+                <input id="contributorId" type="number" placeholder="ID">
+                <input id="amount" type="number" placeholder="AMOUNT">
+                <button id="btn2">CONTRIBUTE</button>
+                <p>TX ID: <span id="txHash1"></span></p>
+            </div>
+
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"
+        type="application/javascript"></script>
+    <script src="script.js"></script>
+    <script>
+        const AddContributionBtn = document.getElementById("btn2")
+        async function contributeFunds() {
+            const id = document.getElementById("contributorId").value;
+            const amount = document.getElementById("amount").value;
+            const tx = await ContributorsContract.contributeFunds(id, amount);
+            const result = await tx.wait();
+        }
+         AddContributionBtn.addEventListener("click", contributeFunds);
+    </script>
+</body>
+
+</html>
